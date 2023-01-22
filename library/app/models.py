@@ -16,6 +16,6 @@ class Series(models.Model):
 
 
 class Book(models.Model):
-    name = models.CharField(max_length=256)
+    book_name = models.CharField(max_length=256)
     author = models.ManyToManyField(Author)
     series = models.ManyToManyField(Series)
