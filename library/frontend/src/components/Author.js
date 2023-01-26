@@ -1,11 +1,11 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom'
 
 const AuthorItem = ({author}) => {
     return (
         <tr>
             <td>
-                {author.first_name}
+                <Link to={`author/${author.id}`}>{author.id}</Link>
             </td>
             <td>
                 {author.last_name}
@@ -22,7 +22,7 @@ const AuthorList = ({authors}) => {
     return (
         <table>
             <th>
-                First name
+                ID
             </th>
             <th>
                 Last Name
