@@ -21,8 +21,8 @@ class BookModelViewSet(ModelViewSet):
     serializer_class = BookModelSerializer
     pagination_class = BookPagination
 
-    def get_queryset(self):
-        return Book.objects.filter(book_name__contains='Пиратский Остров')
+    # def get_queryset(self):
+    #     return Book.objects.filter(book_name__contains='Пиратский Остров')
 
 
 class SeriesPagination(LimitOffsetPagination):
