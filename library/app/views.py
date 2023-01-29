@@ -1,3 +1,4 @@
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import Author, Book, Series
@@ -17,6 +18,7 @@ class BookPagination(LimitOffsetPagination):
 
 
 class BookModelViewSet(ModelViewSet):
+    permission_classes = [AllowAny]
     queryset = Book.objects.all()
     serializer_class = BookModelSerializer
     pagination_class = BookPagination
