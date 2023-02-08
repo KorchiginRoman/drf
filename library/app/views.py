@@ -1,4 +1,4 @@
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import Author, Book, Series
@@ -9,6 +9,7 @@ from rest_framework import mixins, viewsets
 
 class AuthorCustomViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin,
                           viewsets.GenericViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer
 
