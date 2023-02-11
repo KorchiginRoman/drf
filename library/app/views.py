@@ -9,7 +9,7 @@ from rest_framework import mixins, viewsets
 
 class AuthorCustomViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin,
                           viewsets.GenericViewSet):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer
 
@@ -22,7 +22,7 @@ class BookModelViewSet(ModelViewSet):
     permission_classes = [AllowAny]
     queryset = Book.objects.all()
     serializer_class = BookModelSerializer
-    pagination_class = BookPagination
+    # pagination_class = BookPagination
 
     # def get_queryset(self):
     #     return Book.objects.filter(book_name__contains='Пиратский Остров')
