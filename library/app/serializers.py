@@ -2,10 +2,15 @@ from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializ
 from .models import Author, Book, Series
 
 
-class AuthorModelSerializer(HyperlinkedModelSerializer):
+class AuthorModelSerializer(ModelSerializer):
     class Meta:
         model = Author
         fields = '__all__'
+
+class AuthorModelSerializer2(ModelSerializer):
+    class Meta:
+        model = Author
+        fields = ['first_name']
 
 
 class SeriesModelSerializer(HyperlinkedModelSerializer):

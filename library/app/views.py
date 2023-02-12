@@ -1,10 +1,10 @@
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, ViewSet
 from .models import Author, Book, Series
-from .serializers import AuthorModelSerializer, BookModelSerializer, SeriesModelSerializer
+from .serializers import AuthorModelSerializer, BookModelSerializer, SeriesModelSerializer, AuthorModelSerializer2
 from rest_framework.pagination import LimitOffsetPagination
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, viewsets, generics
 
 
 class AuthorCustomViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin,
@@ -40,3 +40,18 @@ class SeriesModelViewSet(ModelViewSet):
 
     def destroy(self, request, **kwargs):
         return Response({'data': 'Удаление закрыто!'})
+
+
+
+class NewApiView(generics.ListAPIView):
+        queryset = Author.objects.all()
+        serializer = AuthorModelSerializer
+
+        def get_serializer_class(self):
+            if self.request.version == '1':
+                return AuthorModelSerializer
+            return AuthorModelSerializer2
+
+
+
+
