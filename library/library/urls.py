@@ -19,6 +19,7 @@ from rest_framework import permissions
 from rest_framework.routers import DefaultRouter
 from app.views import AuthorCustomViewSet, BookModelViewSet, SeriesModelViewSet, NewApiView
 from rest_framework.authtoken.views import obtain_auth_token
+from graphene_django.views import GraphQLView
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -46,7 +47,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', obtain_auth_token),
+    path('graphql/', GraphQLView.as_view(graphiql=True)),
     path('api/', include(router.urls)),
+
     # re_path(r'^newapi/(?P<version>\d)/authors/$', NewApiView.as_view({'get': 'list'})),
     #path('api/1/authors', include('app.urls', namespace='1')),
     #path('api/2/authors', include('app.urls', namespace='2')),
