@@ -8,6 +8,9 @@ const AuthorItem = ({author}) => {
                 <Link to={`author/${author.id}`}>{author.id}</Link>
             </td>
             <td>
+                {author.first_name}
+            </td>
+            <td>
                 {author.last_name}
             </td>
             <td>
@@ -23,6 +26,9 @@ const AuthorList = ({authors}) => {
         <table>
             <th>
                 ID
+            </th>
+            <th>
+                First Name
             </th>
             <th>
                 Last Name
