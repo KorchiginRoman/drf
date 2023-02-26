@@ -38,9 +38,9 @@ schema_view = get_schema_view(
 
 router = DefaultRouter()
 router.register('authors', AuthorCustomViewSet)
-router.register('book', BookModelViewSet)
+router.register('books', BookModelViewSet)
 router.register('series', SeriesModelViewSet)
-#router.register('new', NewApiView, basename='new')
+# router.register('new', NewApiView, basename='new')
 
 
 urlpatterns = [
@@ -51,12 +51,12 @@ urlpatterns = [
     path('api/', include(router.urls)),
 
     # re_path(r'^newapi/(?P<version>\d)/authors/$', NewApiView.as_view({'get': 'list'})),
-    #path('api/1/authors', include('app.urls', namespace='1')),
-    #path('api/2/authors', include('app.urls', namespace='2')),
+    # path('api/1/authors', include('app.urls', namespace='1')),
+    # path('api/2/authors', include('app.urls', namespace='2')),
     # path('api/authors', NewApiView.as_view()),
 
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0),name='schema-redoc'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
 ]

@@ -1,14 +1,15 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
-const BooksItem = ({item}) => {
+
+const BookItem = ({item, deleteBook}) => {
     return (
         <tr>
             <td>
                 {item.id}
             </td>
             <td>
-                {item.book_name}
+                {item.name}
             </td>
             <td>
                 {item.author.last_name}
@@ -16,21 +17,21 @@ const BooksItem = ({item}) => {
             <td>
                 {item.series.name}
             </td>
+            <td><button onClick={ ()=>deleteBook(item.id)} type='button'>Удалить</button></td>
         </tr>
     )
 }
 
 
-const AuthorBookList = ({items}) => {
-    let {id} = useParams()
-    let filtered_items = items.filter((item) => item.author.id == id)
+const BookList = ({items, deleteBook}) => {
     return (
+        <div>
         <table>
             <th>
                 ID
             </th>
             <th>
-                Book Name
+                Name
             </th>
             <th>
                 Author
@@ -38,8 +39,10 @@ const AuthorBookList = ({items}) => {
             <th>
                 Series
             </th>
-            {filtered_items.map((item) => <BooksItem item={item} />)}
+            {items.map((item) => <BookItem item={item} deleteBook={deleteBook} />)}
         </table>
+        <Link to='/books/create'>Добавить книгу</Link>
+        </div>
     )
 }
-export default AuthorBookList
+export default BookList

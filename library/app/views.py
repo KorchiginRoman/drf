@@ -7,8 +7,7 @@ from rest_framework.pagination import LimitOffsetPagination
 from rest_framework import mixins, viewsets, generics
 
 
-class AuthorCustomViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin,
-                          viewsets.GenericViewSet):
+class AuthorCustomViewSet(ModelViewSet):
     # permission_classes = [IsAuthenticated]
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer
@@ -22,7 +21,7 @@ class BookModelViewSet(ModelViewSet):
     permission_classes = [AllowAny]
     queryset = Book.objects.all()
     serializer_class = BookModelSerializer
-    # pagination_class = BookPagination
+    pagination_class = BookPagination
 
     # def get_queryset(self):
     #     return Book.objects.filter(book_name__contains='Пиратский Остров')
@@ -38,20 +37,15 @@ class SeriesModelViewSet(ModelViewSet):
     pagination_class = SeriesPagination
     filterset_fields = ['name', 'publishing_house']
 
-    def destroy(self, request, **kwargs):
-        return Response({'data': 'Удаление закрыто!'})
-
+    # def destroy(self, request, **kwargs):
+    #     return Response({'data': 'Удаление закрыто!'})
 
 
 class NewApiView(generics.ListAPIView):
-        queryset = Author.objects.all()
-        serializer = AuthorModelSerializer
+    queryset = Author.objects.all()
+    serializer = AuthorModelSerializer
 
-        def get_serializer_class(self):
-            if self.request.version == '1':
-                return AuthorModelSerializer
-            return AuthorModelSerializer2
-
-
-
-
+    def get_serializer_class(self):
+        if self.request.version == '1':
+            return AuthorModelSerializer
+        return AuthorModelSerializer2
